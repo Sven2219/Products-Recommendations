@@ -71,6 +71,14 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>EBGaramond-Bold.ttf</string>
+		<string>EBGaramond-Italic.ttf</string>
+		<string>EBGaramond-Medium.ttf</string>
+		<string>EBGaramond-Regular.ttf</string>
+		<string>Bold.ttf</string>
+		<string>Italic.ttf</string>
+		<string>Medium.ttf</string>
+		<string>Regular.ttf</string>
 	</array>
 </dict>
 </plist>

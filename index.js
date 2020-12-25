@@ -1,9 +1,11 @@
 /**
  * @format
  */
-
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['It appears that you are using']);
 import {AppRegistry} from 'react-native';
-import App from './src/screens/Smartphones';
 import {name as appName} from './app.json';
+import Navigation from './src/screens/Navigation';
 
-AppRegistry.registerComponent(appName, () => App);
+AppRegistry.registerComponent(appName, () => Navigation);
+
