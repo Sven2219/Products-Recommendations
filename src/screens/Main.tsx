@@ -7,6 +7,7 @@ import { Actions, IState, reducer } from '../reducers/main';
 import ShopTitle from '../components/general/ShopTitle';
 import ProductsList from '../components/products/ProductsList';
 import axios from 'axios';
+import { ICON_SIZE } from '../helpers/constants';
 interface IProps {
     navigation: any;
 }
@@ -18,10 +19,11 @@ const Main = ({ navigation }: IProps) => {
     }
     useEffect(() => {
         getProducts();
-    }, [])
+    }, [state.category])
+
     const getProducts = async () => {
         try {
-            const products = await axios.get('http://192.168.0.135:1337/');
+            const products = await axios.get(`http://192.168.0.135:1337/${state.category}`);
             dispatch({ type: "setProducts", payload: products.data });
         } catch (error) {
             console.log(error)
@@ -31,9 +33,9 @@ const Main = ({ navigation }: IProps) => {
         <View style={styles.mainContainer}>
             <ShopTitle />
             <View style={styles.cartContainer}>
-                <Ionicons name="cart-outline" size={35} />
+                <Ionicons name="cart-outline" size={ICON_SIZE} />
             </View>
-            <View style={{ height: 50 }}>
+            <View style={styles.scrollViewContainer}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}
                         onPress={() => dispatch({ type: "setCategory", payload: SMARTPHONES })}
@@ -55,7 +57,7 @@ const Main = ({ navigation }: IProps) => {
                         isActive={isActive(SPORT_EQUIPMENT)} />
                 </ScrollView>
             </View>
-            { state.products[0] !== undefined && < ProductsList navigation={navigation} products={state.products} />}
+            {state.products[0] !== undefined && < ProductsList navigation={navigation} products={state.products} />}
         </View>
     )
 }
@@ -65,7 +67,9 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff'
     },
-
+    scrollViewContainer: {
+        height: 50
+    },
     cartContainer: {
         position: 'absolute',
         top: 15,

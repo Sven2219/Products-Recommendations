@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
+        borderWidth:0.001
     },
     categoryText: {
         fontSize: 17,
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
             width: 0,
             height: 6,
         },
-        shadowOpacity: 0.39,
+        shadowOpacity: 0.2,
         shadowRadius: 8.30,
 
         elevation: 2,

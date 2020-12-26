@@ -1,7 +1,9 @@
-import React from 'react';
-import { FlatList, Text, View } from 'react-native';
+import React, { useRef } from 'react';
+import { Animated, View } from 'react-native';
 import { IProduct } from '../../helpers/interfaces';
+import Pagination from './Pagination';
 import Product from './Product';
+import Ticker from './Ticker';
 
 interface IProps {
     products: IProduct[]
@@ -9,16 +11,30 @@ interface IProps {
 }
 
 const ProductsList = ({ products, navigation }: IProps) => {
-    const renderItem = (product: IProduct, index: number) => {
-        return (<Product navigation={navigation} product={product} />)
-    }
+    const scrollX = useRef(new Animated.Value(0)).current;
+
     return (
-        <FlatList
-            data={products}
-            windowSize={2}
-            keyExtractor={(_, index) => index.toString()}
-            renderItem={({ item: product, index }) => renderItem(product, index)}
-        />)
+        <View>
+            <Animated.FlatList
+                horizontal
+                data={products}
+                showsHorizontalScrollIndicator={false}
+                onScroll={Animated.event(
+                    [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                    { useNativeDriver: true }
+                )}
+                scrollEventThrottle={16}
+                pagingEnabled
+                windowSize={2}
+                keyExtractor={(_, index) => index.toString()}
+                renderItem={({ item: product, index }) => <Product navigation={navigation} product={product} scrollX={scrollX} index={index} />}
+            />
+            <Pagination scrollX={scrollX} products={products} />
+            <Ticker scrollX={scrollX} product={products} />
+        </View>
+
+
+    )
 
 }
 
