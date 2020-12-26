@@ -22,29 +22,31 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
         inputRange,
         outputRange: [width, 0, -width]
     })
-    return (<View style={styles.productStyle}>
-        <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', { product })} style={styles.imageSize}>
-            <SharedElement id={`product.${product.p_id}.photo`} style={[styles.imageStyle, styles.imageSize]}>
-                <Animated.Image
-                    source={{ uri: product.p_image }}
+    return (
+        <View style={styles.productStyle}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', { product })} style={styles.imageSize}>
+                <SharedElement id={`product.${product.p_id}.photo`} style={[styles.imageStyle, styles.imageSize]}>
+                    <Animated.Image
+                        source={{ uri: product.p_image }}
+                        style={[
+                            styles.imageStyle,
+                            { transform: [{ scale }] }
+                        ]}
+                    />
+                </SharedElement>
+            </TouchableWithoutFeedback >
+            <View style={styles.textContainer}>
+                <Animated.Text
                     style={[
-                        styles.imageStyle,
-                        { transform: [{ scale }] }
+                        styles.webshopPrice,
+                        { transform: [{ translateX }] }
                     ]}
-                />
-            </SharedElement>
-        </TouchableWithoutFeedback >
-        <View style={styles.textContainer}>
-            <Animated.Text
-                style={[
-                    styles.webshopPrice,
-                    { transform: [{ translateX }] }
-                ]}
-            >
-                Webshop price: {product.p_webshop_price}
-            </Animated.Text>
+                >
+                    Webshop price: {product.p_webshop_price}
+                </Animated.Text>
+            </View>
         </View>
-    </View>)
+    )
 }
 const styles = StyleSheet.create({
     imageStyle: {

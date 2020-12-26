@@ -3,12 +3,14 @@ import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SharedElement } from 'react-navigation-shared-element';
+import CartIcon from '../components/general/CartIcon';
 
 
 const Details = (props: any) => {
     const { product } = props.route.params;
     return (
         <View style={styles.mainContainer}>
+            <CartIcon onPress={() => props.navigation.navigate('Cart')} />
             <TouchableOpacity onPress={() => props.navigation.goBack()}>
                 <Text style={{ fontSize: 40 }}>Back</Text>
             </TouchableOpacity>
@@ -18,7 +20,7 @@ const Details = (props: any) => {
         </View>
     )
 }
-Details.sharedElements = (route: any, otherRoute:any, showing: any) => {
+Details.sharedElements = (route: any, otherRoute: any, showing: any) => {
     const { product } = route.params;
     return [
         { id: `product.${product.p_id}.photo` },

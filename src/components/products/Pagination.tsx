@@ -1,6 +1,6 @@
 import React from 'react';
 import { Animated, StyleSheet, View } from 'react-native'
-import { DOT_SIZE, height, width } from '../../helpers/constants';
+import { DOT_SIZE, width } from '../../helpers/constants';
 import { IProduct } from '../../helpers/interfaces';
 
 interface IProps {
@@ -15,8 +15,8 @@ const Pagination = ({ products, scrollX }: IProps) => {
         outputRange: [-DOT_SIZE, 0, DOT_SIZE],
     })
     return (
-        <View  style={styles.pagination}>
-            <Animated.View style={[styles.paginationIndicator, {position:'absolute',left:0, transform: [{ translateX }] }]} />
+        <View style={styles.pagination}>
+            <Animated.View style={[styles.paginationIndicator, { transform: [{ translateX }] }]} />
             {products.map((product) => {
                 return (
                     <View key={product.p_id} style={[styles.paginationDotContainer]}>
@@ -28,18 +28,18 @@ const Pagination = ({ products, scrollX }: IProps) => {
     )
 }
 const styles = StyleSheet.create({
-    pagination:{
-        position:'absolute',
-        right:20,
-        bottom:150,
-        flexDirection:'row',
-        height:DOT_SIZE
+    pagination: {
+        position: 'absolute',
+        right: 20,
+        bottom: 150,
+        flexDirection: 'row',
+        height: DOT_SIZE
     },
     paginationDot: {
         width: DOT_SIZE * 0.3,
         height: DOT_SIZE * 0.3,
         borderRadius: DOT_SIZE * 0.15,
-        backgroundColor:'#000'
+        backgroundColor: '#000'
     },
     paginationDotContainer: {
         width: DOT_SIZE,
@@ -51,6 +51,8 @@ const styles = StyleSheet.create({
         height: DOT_SIZE,
         borderRadius: DOT_SIZE / 2,
         borderWidth: 2,
+        position: 'absolute',
+        left: 0,
         borderColor: "rgba(178, 34, 34,0.6)"
     }
 })

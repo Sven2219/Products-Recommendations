@@ -1,13 +1,12 @@
 import React, { useEffect, useReducer } from 'react';
-import { Image, ScrollView, StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 import Category from '../components/general/Category';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import { COMPUTERS, COMPUTER_EQUIPMENT, SMARTPHONES, SMARTPHONE_EQUIPMENT, SPORT, SPORT_EQUIPMENT } from '../helpers/types';
 import { Actions, IState, reducer } from '../reducers/main';
 import ShopTitle from '../components/general/ShopTitle';
 import ProductsList from '../components/products/ProductsList';
 import axios from 'axios';
-import { ICON_SIZE } from '../helpers/constants';
+import CartIcon from '../components/general/CartIcon';
 interface IProps {
     navigation: any;
 }
@@ -23,7 +22,7 @@ const Main = ({ navigation }: IProps) => {
 
     const getProducts = async () => {
         try {
-            const products = await axios.get(`http://192.168.0.135:1337/${state.category}`);
+            const products = await axios.get(`https://recommendation1.azurewebsites.net/${state.category}`);
             dispatch({ type: "setProducts", payload: products.data });
         } catch (error) {
             console.log(error)
@@ -32,9 +31,7 @@ const Main = ({ navigation }: IProps) => {
     return (
         <View style={styles.mainContainer}>
             <ShopTitle />
-            <View style={styles.cartContainer}>
-                <Ionicons name="cart-outline" size={ICON_SIZE} />
-            </View>
+            <CartIcon onPress={() => navigation.navigate('Cart')} />
             <View style={styles.scrollViewContainer}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}
@@ -70,10 +67,6 @@ const styles = StyleSheet.create({
     scrollViewContainer: {
         height: 50
     },
-    cartContainer: {
-        position: 'absolute',
-        top: 15,
-        right: 10
-    }
+
 })
 export default Main;
