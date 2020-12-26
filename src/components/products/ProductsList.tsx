@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Animated } from 'react-native';
+import { Animated, View } from 'react-native';
 import { IProduct } from '../../helpers/interfaces';
 import Pagination from './Pagination';
 import Product from './Product';
@@ -13,7 +13,7 @@ interface IProps {
 const ProductsList = ({ products, navigation }: IProps) => {
     const scrollX = useRef(new Animated.Value(0)).current;
     return (
-        <>
+        <View>
             <Animated.FlatList
                 horizontal
                 data={products}
@@ -29,8 +29,8 @@ const ProductsList = ({ products, navigation }: IProps) => {
                 renderItem={({ item: product, index }) => <Product navigation={navigation} product={product} scrollX={scrollX} index={index} />}
             />
             <Pagination scrollX={scrollX} products={products} />
-            <Ticker scrollX={scrollX} product={products} />
-        </>
+            <Ticker scrollX={scrollX} products={products} />
+        </View>
     )
 }
 

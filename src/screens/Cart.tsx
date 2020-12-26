@@ -1,16 +1,28 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { ICON_SIZE } from '../helpers/constants';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import { StyleSheet, View } from 'react-native';
+import { ICON_SPACE, ICON_TOP } from '../helpers/constants';
+import Icon from '../components/general/Icon';
 
 interface IProps {
     navigation: any;
 }
 
 const Cart = ({ navigation }: IProps) => {
-    return (<View style={{ flex: 1, backgroundColor: "#fff" }}>
-        <Ionicons name="arrow-back" size={ICON_SIZE} onPress={() => navigation.goBack()} />
-
+    return (<View style={styles.mainContainer}>
+        <Icon left={ICON_SPACE} onPress={() => navigation.goBack()} name="arrow-back" />
     </View>)
 }
+
+const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1,
+        backgroundColor: '#fff'
+    },
+    arrowBackContainer: {
+        position: 'absolute',
+        left: ICON_SPACE,
+        top: ICON_TOP
+    }
+})
+
 export default Cart;

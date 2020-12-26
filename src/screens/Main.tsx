@@ -6,7 +6,8 @@ import { Actions, IState, reducer } from '../reducers/main';
 import ShopTitle from '../components/general/ShopTitle';
 import ProductsList from '../components/products/ProductsList';
 import axios from 'axios';
-import CartIcon from '../components/general/CartIcon';
+import Icon from '../components/general/Icon';
+import { ICON_SPACE } from '../helpers/constants';
 interface IProps {
     navigation: any;
 }
@@ -31,7 +32,7 @@ const Main = ({ navigation }: IProps) => {
     return (
         <View style={styles.mainContainer}>
             <ShopTitle />
-            <CartIcon onPress={() => navigation.navigate('Cart')} />
+            <Icon onPress={() => navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline"/>
             <View style={styles.scrollViewContainer}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}

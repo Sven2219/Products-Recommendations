@@ -38,11 +38,11 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
             <View style={styles.textContainer}>
                 <Animated.Text
                     style={[
-                        styles.webshopPrice,
+                        styles.price,
                         { transform: [{ translateX }] }
                     ]}
                 >
-                    Webshop price: {product.p_webshop_price}
+                    Price: {product.p_price}
                 </Animated.Text>
             </View>
         </View>
@@ -69,12 +69,11 @@ const styles = StyleSheet.create({
         flex: 0.5,
     },
 
-    webshopPrice: {
+    price: {
         color: '#000',
         fontFamily: 'Medium',
-        textAlign: 'left',
-        width: IMAGE_SIZE,
-        marginRight: 10,
+        textAlign: 'center',
+        width: width,
         fontSize: 16,
         lineHeight: 16 * 1.5,
     },

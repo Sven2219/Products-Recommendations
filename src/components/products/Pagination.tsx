@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         position: 'absolute',
         left: 0,
-        borderColor: "rgba(178, 34, 34,0.6)"
+        borderColor: "rgba(218, 165, 32,0.8)",
     }
 })
 export default Pagination;
