@@ -33,13 +33,7 @@ const Details = (props: any) => {
             <View style={{ position: 'absolute', top: IMAGE_SIZE * 0.7, right: 20 }}>
                 <Text style={{ fontSize: 23, fontFamily: 'Bold', textAlign: 'center' }}>${product.p_price}</Text>
             </View>
-            <View style={{ height: DETAILS_CONTAINERS_HEIGHT, backgroundColor: 'red', top: 20 }}>
-                <Text style={{ fontSize: 24, fontFamily: 'Bold' }}>Realme 6s</Text>
-                <Text>{product.p_description}</Text>
-            </View>
-            <View style={{ backgroundColor: 'blue', height: DETAILS_CONTAINERS_HEIGHT }}>
-                <BoughtTogether togetherBought={togetherBought} />
-            </View>
+
             <View style={styles.cartContainer}>
                 <TouchableOpacity onPress={addToCart}>
                     <Text style={styles.addToCartText}>Add to cart</Text>

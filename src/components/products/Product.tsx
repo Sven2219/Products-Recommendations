@@ -78,4 +78,6 @@ const styles = StyleSheet.create({
         lineHeight: 16 * 1.5,
     },
 })
-export default Product;;
+export default React.memo(Product, (prevProps, currentProps) => {
+    return prevProps.product == currentProps.product;
+});

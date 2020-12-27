@@ -24,7 +24,7 @@ const ProductsList = ({ products, navigation }: IProps) => {
                 )}
                 scrollEventThrottle={16}
                 pagingEnabled
-                windowSize={2}
+                windowSize={1}
                 keyExtractor={(_, index) => index.toString()}
                 renderItem={({ item: product, index }) => <Product navigation={navigation} product={product} scrollX={scrollX} index={index} />}
             />

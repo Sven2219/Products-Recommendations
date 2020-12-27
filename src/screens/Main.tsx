@@ -20,10 +20,10 @@ const Main = ({ navigation }: IProps) => {
     useEffect(() => {
         getProducts();
     }, [state.category])
-
     const getProducts = async () => {
         try {
-            const products = await axios.get(`https://recommendation1.azurewebsites.net/${state.category}`);
+            const category = state.category.replace(" ", "");
+            const products = await axios.get(`https://recommendation1.azurewebsites.net/${category}`);
             dispatch({ type: "setProducts", payload: products.data });
         } catch (error) {
             console.log(error)
@@ -32,7 +32,7 @@ const Main = ({ navigation }: IProps) => {
     return (
         <View style={styles.mainContainer}>
             <ShopTitle />
-            <Icon onPress={() => navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline"/>
+            <Icon onPress={() => navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline" />
             <View style={styles.scrollViewContainer}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}
