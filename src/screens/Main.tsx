@@ -4,7 +4,7 @@ import Category from '../components/general/Category';
 import { COMPUTERS, COMPUTER_EQUIPMENT, SMARTPHONES, SMARTPHONE_EQUIPMENT, SPORT, SPORT_EQUIPMENT } from '../helpers/types';
 import { Actions, IState, reducer } from '../reducers/main';
 import ShopTitle from '../components/general/ShopTitle';
-import ProductsList from '../components/products/ProductsList';
+import ProductsList from '../components/main/ProductsList';
 import axios from 'axios';
 import Icon from '../components/general/Icon';
 import { ICON_SPACE } from '../helpers/constants';

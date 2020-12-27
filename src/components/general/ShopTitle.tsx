@@ -6,7 +6,7 @@ const ShopTitle = () => {
     return (
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>
-                SVEN SHOP
+                BETTER THAN LINKS
             </Text>
         </View>
     )

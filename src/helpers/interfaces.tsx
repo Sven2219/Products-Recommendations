@@ -6,3 +6,7 @@ export interface IProduct {
     p_description: string;
     p_category: string;
 }
+export interface IBrackedCart {
+    id: number;
+    category: string;
+}

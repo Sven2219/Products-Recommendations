@@ -2,8 +2,10 @@ import React from 'react';
 import { View, Animated, StyleSheet } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { SharedElement } from 'react-navigation-shared-element';
-import { width, height, IMAGE_SIZE } from '../../helpers/constants';
+import { IMAGE_SIZE, width, height } from '../../helpers/constants';
+
 import { IProduct } from '../../helpers/interfaces';
+
 
 interface IProps {
     product: IProduct;
@@ -24,17 +26,19 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
     })
     return (
         <View style={styles.productStyle}>
+
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', { product })} style={styles.imageSize}>
-                <SharedElement id={`product.${product.p_id}.photo`} style={[styles.imageStyle, styles.imageSize]}>
+                <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageSize}>
                     <Animated.Image
                         source={{ uri: product.p_image }}
+                        resizeMethod="auto"
                         style={[
-                            styles.imageStyle,
-                            { transform: [{ scale }] }
+                            { ...StyleSheet.absoluteFillObject, resizeMode: 'contain', transform: [{ scale }] }
                         ]}
                     />
                 </SharedElement>
             </TouchableWithoutFeedback >
+
             <View style={styles.textContainer}>
                 <Animated.Text
                     style={[
@@ -51,11 +55,10 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
 const styles = StyleSheet.create({
     imageStyle: {
         resizeMode: 'contain',
-        flex: 1,
     },
     imageSize: {
         width: IMAGE_SIZE,
-        height: IMAGE_SIZE
+        height: IMAGE_SIZE,
     },
     productStyle: {
         width,
@@ -79,5 +82,5 @@ const styles = StyleSheet.create({
     },
 })
 export default React.memo(Product, (prevProps, currentProps) => {
-    return prevProps.product == currentProps.product;
+    return prevProps.index == currentProps.index && prevProps.product == currentProps.product && prevProps.navigation == currentProps.navigation;
 });
