@@ -17,3 +17,8 @@ export const DETAILS_CONTAINERS_HEIGHT: number = height / 4;
 export const CART_CONTAINER_WIDTH: number = width * 0.7;
 export const CART_CONTAINER_HEIGHT: number = height / 1.8;
 export const EMPTY_CART_SIZE: number = 100;
+
+export const CART_IMAGE_SIZE: number = (height + width) / 12;
+export const CART_PRODUCT_CONTAINER_WIDTH: number = width * 0.85;
+export const CART_PRODUCT_CONTAINER_HEIGHT: number = height / 5.4;
+export const DELETE_ICON_SIZE: number = 25;

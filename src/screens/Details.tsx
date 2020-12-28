@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { SharedElement } from 'react-navigation-shared-element';
+import YellowButton from '../components/general/YellowButton';
 import Icon from '../components/general/Icon';
 import { AppDispatch } from '../context/AppDispatch';
 import { AppState } from '../context/AppState';
@@ -22,25 +23,17 @@ const Details = (props: any): JSX.Element => {
 
     return (
         <View style={styles.mainContainer}>
-            <Icon onPress={() => props.navigation.goBack()} left={ICON_SPACE} name="arrow-back" />
+            <Icon onPress={() => props.navigation.navigate('Main')} left={ICON_SPACE} name="arrow-back" />
             <Icon onPress={() => props.navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline" />
             <View style={styles.imageContainer}>
                 <SharedElement id={`product.${product.p_id}.photo`} style={styles.sharedElement}>
-                    <Image source={{ uri: product.p_image }} style={styles.imageStyle} resizeMethod="auto" />
+                    <Image source={{ uri: product.p_image }} style={styles.imageStyle}  />
                 </SharedElement>
             </View>
             <View style={styles.priceContainer}>
                 <Text style={styles.priceText}>{product.p_price} Kn</Text>
             </View>
-
-            <View style={styles.cartContainer}>
-                <TouchableOpacity onPress={addToCart}>
-                    <Text style={styles.addToCartText}>Add to cart</Text>
-                </TouchableOpacity>
-            </View>
-            <View style={[styles.heartContainer]}>
-                <Ionicons name="heart-outline" size={ICON_SIZE} />
-            </View>
+            <YellowButton onPress={addToCart} title={"Add to cart"}/>
         </View>
     )
 }
@@ -71,32 +64,17 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     sharedElement: {
-        width: IMAGE_SIZE * 0.8,
-        height: IMAGE_SIZE * 0.8,
+        width: IMAGE_SIZE * 0.69,
+        height: IMAGE_SIZE * 0.73,
+
     },
     imageStyle: {
         ...StyleSheet.absoluteFillObject,
-        resizeMode: 'contain'
+        resizeMode: 'cover'
     },
     tickerStyle: {
         fontSize: 24,
         fontWeight: "bold",
-    },
-    cartContainer: {
-        width: 220,
-        height: 50,
-        borderRadius: 25,
-        backgroundColor: "rgba(218, 165, 32,0.8)",
-        position: 'absolute',
-        bottom: 20,
-        right: 10,
-        alignItems: 'center',
-        justifyContent: 'center'
-
-    },
-    addToCartText: {
-        fontFamily: 'Bold',
-        fontSize: 18
     },
     heartContainer: {
         width: 50,

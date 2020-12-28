@@ -28,7 +28,6 @@ const Product = ({ product, scrollX, index, navigation }: IProps): JSX.Element =
                 <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageSize}>
                     <Animated.Image
                         source={{ uri: product.p_image }}
-                        resizeMethod="auto"
                         style={[
                             styles.imageStyle,
                             { transform: [{ scale }] }
@@ -44,7 +43,7 @@ const Product = ({ product, scrollX, index, navigation }: IProps): JSX.Element =
                         { transform: [{ translateX }] }
                     ]}
                 >
-                    Price: {product.p_price}
+                    Price: {product.p_price}kn
                 </Animated.Text>
             </View>
         </View>

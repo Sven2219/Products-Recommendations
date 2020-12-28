@@ -9,15 +9,17 @@ interface IProps {
 }
 
 const ProductsList = ({ products }: IProps): JSX.Element => {
-    const renderItem = (item: IProduct): JSX.Element => {
-        return <Product item={item} />
+    const renderItem = (item: IProduct,index:number): JSX.Element => {
+        return <Product item={item} index={index}/>
     }
     return (
-        <View>
+        <View style={{ height: "75%" }}>
             <FlatList
+                showsVerticalScrollIndicator={false}
+                windowSize={2}
                 data={products}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }: { item: IProduct }) => renderItem(item)}
+                renderItem={({ item,index }: { item: IProduct,index:number }) => renderItem(item,index)}
             />
         </View>)
 }
