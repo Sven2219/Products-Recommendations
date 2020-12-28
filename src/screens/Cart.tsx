@@ -12,7 +12,7 @@ interface IProps {
     navigation: any;
 }
 
-const Cart = ({ navigation }: IProps) => {
+const Cart = ({ navigation }: IProps): JSX.Element => {
     const { shoppingCart } = useContext(AppState);
     const { setShoppingCart } = useContext(AppDispatch);
     const breakToIdAndCategory = (): IBrackedCart[] => {
@@ -34,18 +34,18 @@ const Cart = ({ navigation }: IProps) => {
             console.log(error)
         }
     }
-    const getItems = (): JSX.Element => {
+    const getProducts = (): JSX.Element => {
         if (shoppingCart.length < 1) {
             return (<EmptyCart />)
         }
-        return <ProductsList products={shoppingCart}/>
+        return <ProductsList products={shoppingCart} />
     }
     return (<View style={styles.mainContainer}>
         <Icon left={ICON_SPACE} onPress={() => navigation.goBack()} name="arrow-back" />
         <View style={styles.headerTextPosition}>
             <Text style={styles.headerText}>Shopping cart</Text>
         </View>
-        {getItems()}
+        {getProducts()}
     </View>)
 }
 

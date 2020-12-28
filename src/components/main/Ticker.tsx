@@ -6,7 +6,7 @@ interface IProps {
     scrollX: Animated.Value;
     products: IProduct[];
 }
-const Ticker = ({ scrollX, products }: IProps) => {
+const Ticker = ({ scrollX, products }: IProps): JSX.Element => {
     const translateY = scrollX.interpolate({
         inputRange: [-width, 0, width],
         outputRange: [TICKER_HEIGHT, 0, -TICKER_HEIGHT],

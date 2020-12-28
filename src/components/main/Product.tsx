@@ -3,9 +3,7 @@ import { View, Animated, StyleSheet } from 'react-native';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { SharedElement } from 'react-navigation-shared-element';
 import { IMAGE_SIZE, width, height } from '../../helpers/constants';
-
 import { IProduct } from '../../helpers/interfaces';
-
 
 interface IProps {
     product: IProduct;
@@ -14,7 +12,7 @@ interface IProps {
     navigation: any;
 }
 
-const Product = ({ product, scrollX, index, navigation }: IProps) => {
+const Product = ({ product, scrollX, index, navigation }: IProps): JSX.Element => {
     const inputRange = [(index - 1) * width, (index) * width, (index + 1) * width];
     const scale = scrollX.interpolate({
         inputRange,
@@ -26,14 +24,14 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
     })
     return (
         <View style={styles.productStyle}>
-
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', { product })} style={styles.imageSize}>
                 <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageSize}>
                     <Animated.Image
                         source={{ uri: product.p_image }}
                         resizeMethod="auto"
                         style={[
-                            { ...StyleSheet.absoluteFillObject, resizeMode: 'contain', transform: [{ scale }] }
+                            styles.imageStyle,
+                            { transform: [{ scale }] }
                         ]}
                     />
                 </SharedElement>
@@ -55,6 +53,7 @@ const Product = ({ product, scrollX, index, navigation }: IProps) => {
 const styles = StyleSheet.create({
     imageStyle: {
         resizeMode: 'contain',
+        ...StyleSheet.absoluteFillObject
     },
     imageSize: {
         width: IMAGE_SIZE,
@@ -71,7 +70,6 @@ const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         flex: 0.5,
     },
-
     price: {
         color: '#000',
         fontFamily: 'Medium',

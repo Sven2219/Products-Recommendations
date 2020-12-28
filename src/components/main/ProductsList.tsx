@@ -10,7 +10,7 @@ interface IProps {
     navigation: any
 }
 
-const ProductsList = ({ products, navigation }: IProps) => {
+const ProductsList = ({ products, navigation }: IProps): JSX.Element => {
     const scrollX = useRef(new Animated.Value(0)).current;
     return (
         <View>

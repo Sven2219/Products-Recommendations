@@ -10,7 +10,7 @@ interface IProps {
     name: string;
 }
 
-const Icon = ({ onPress, left, right, name }: IProps) => {
+const Icon = ({ onPress, left, right, name }: IProps): JSX.Element => {
     return (
         <View style={[styles.cartContainer, { left: left, right: right }]}>
             <Ionicons name={name} size={ICON_SIZE} onPress={onPress} />
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     cartContainer: {
         position: 'absolute',
         top: ICON_TOP,
-        zIndex:1
+        zIndex: 1
     }
 })
 

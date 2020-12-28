@@ -17,7 +17,7 @@ const SharedElementStack = createSharedElementStackNavigator();
 const Stack = createStackNavigator();
 
 
-const SharedElementNavigation = () => {
+const SharedElementNavigation = (): JSX.Element => {
     return (
         <SharedElementStack.Navigator initialRouteName={"Main"} headerMode="none">
             <SharedElementStack.Screen component={Details} name="Details"
@@ -55,7 +55,7 @@ const SharedElementNavigation = () => {
         </SharedElementStack.Navigator>
     )
 }
-const StackNavigation = () => {
+const StackNavigation = (): JSX.Element => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Navigation" headerMode="none">
@@ -65,7 +65,7 @@ const StackNavigation = () => {
         </NavigationContainer>
     )
 }
-const App = () => {
+const App = (): JSX.Element => {
     const [shoppingCart, setShoppingCart] = useState<IProduct[]>([]);
     return (
         <AppDispatch.Provider value={{ setShoppingCart }}>

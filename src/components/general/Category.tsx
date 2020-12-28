@@ -7,7 +7,7 @@ interface IProps {
     isActive: boolean;
 }
 
-const Category = ({ name, onPress, isActive }: IProps) => {
+const Category = ({ name, onPress, isActive }: IProps): JSX.Element => {
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={[styles.mainContainer, styles.shadow]}>
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 10,
-        borderWidth:0.001
+        borderWidth: 0.001
     },
     categoryText: {
         fontSize: 17,

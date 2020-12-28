@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 
-const ShopTitle = () => {
+const ShopTitle = (): JSX.Element => {
     return (
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>

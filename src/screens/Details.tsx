@@ -9,7 +9,7 @@ import { ICON_SIZE, ICON_SPACE, IMAGE_SIZE } from '../helpers/constants';
 import { IProduct } from '../helpers/interfaces';
 
 
-const Details = (props: any) => {
+const Details = (props: any): JSX.Element => {
     const { product } = props.route.params;
     const { setShoppingCart } = useContext(AppDispatch);
     const { shoppingCart } = useContext(AppState);
@@ -24,9 +24,9 @@ const Details = (props: any) => {
         <View style={styles.mainContainer}>
             <Icon onPress={() => props.navigation.goBack()} left={ICON_SPACE} name="arrow-back" />
             <Icon onPress={() => props.navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline" />
-            <View style={{justifyContent:'center',alignItems:'center',top:40}}>
-                <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageStyle}>
-                    <Image source={{ uri: product.p_image }} style={{ ...StyleSheet.absoluteFillObject,resizeMode:'cover' }} resizeMethod="auto"/>
+            <View style={styles.imageContainer}>
+                <SharedElement id={`product.${product.p_id}.photo`} style={styles.sharedElement}>
+                    <Image source={{ uri: product.p_image }} style={styles.imageStyle} resizeMethod="auto" />
                 </SharedElement>
             </View>
             <View style={styles.priceContainer}>
@@ -53,11 +53,12 @@ Details.sharedElements = (route: any, otherRoute: any, showing: any) => {
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
-        backgroundColor:'#fff'
+        backgroundColor: '#fff'
     },
     imageContainer: {
-        top: 20,
-        alignItems: 'center'
+        justifyContent: 'center',
+        alignItems: 'center',
+        top: 20
     },
     priceContainer: {
         position: 'absolute',
@@ -69,9 +70,13 @@ const styles = StyleSheet.create({
         fontFamily: 'Bold',
         textAlign: 'center'
     },
-    imageStyle: {
+    sharedElement: {
         width: IMAGE_SIZE * 0.8,
         height: IMAGE_SIZE * 0.8,
+    },
+    imageStyle: {
+        ...StyleSheet.absoluteFillObject,
+        resizeMode: 'contain'
     },
     tickerStyle: {
         fontSize: 24,

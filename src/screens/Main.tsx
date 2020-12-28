@@ -12,7 +12,7 @@ interface IProps {
     navigation: any;
 }
 
-const Main = ({ navigation }: IProps) => {
+const Main = ({ navigation }: IProps): JSX.Element => {
     const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { category: SMARTPHONES, products: [] });
     const isActive = (givenCategory: string): boolean => {
         return state.category === givenCategory;
@@ -20,9 +20,9 @@ const Main = ({ navigation }: IProps) => {
     useEffect(() => {
         getProducts();
     }, [state.category])
-    const getProducts = async () => {
+    const getProducts = async (): Promise<void> => {
         try {
-            const category = state.category.replace(" ", "");
+            const category: string = state.category.replace(" ", "");
             const products = await axios.get(`https://recommendation1.azurewebsites.net/${category}`);
             dispatch({ type: "setProducts", payload: products.data });
         } catch (error) {

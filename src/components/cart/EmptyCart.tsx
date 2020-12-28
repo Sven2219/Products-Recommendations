@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { CART_CONTAINER_HEIGHT, CART_CONTAINER_WIDTH, EMPTY_CART_SIZE } from '../../helpers/constants';
 

@@ -8,7 +8,7 @@ interface IProps {
     scrollX: Animated.Value;
 }
 
-const Pagination = ({ products, scrollX }: IProps) => {
+const Pagination = ({ products, scrollX }: IProps): JSX.Element => {
     const inputRange = [-width, 0, width];
     const translateX = scrollX.interpolate({
         inputRange,
