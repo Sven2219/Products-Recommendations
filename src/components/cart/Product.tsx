@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
         width: CART_PRODUCT_CONTAINER_WIDTH,
         height: CART_PRODUCT_CONTAINER_HEIGHT,
         alignItems: 'center',
-        borderWidth: 0.001,
+        borderColor:'#fff',
         borderRadius: 20,
         flexDirection: 'row',
         backgroundColor:'#fff',

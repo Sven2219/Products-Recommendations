@@ -5,7 +5,7 @@ import { CART_CONTAINER_HEIGHT, CART_CONTAINER_WIDTH, EMPTY_CART_SIZE } from '..
 
 const EmptyCart = (): JSX.Element => {
     return (<View style={styles.mainContainer}>
-        <View style={styles.cartContainer}>
+        <View style={[styles.cartContainer, styles.shadow]}>
             <Ionicons name="md-cart-outline" size={EMPTY_CART_SIZE} />
             <Text style={styles.textStyle}>Your cart is currently empty</Text>
         </View>
@@ -23,11 +23,24 @@ const styles = StyleSheet.create({
         height: CART_CONTAINER_HEIGHT,
         borderRadius: 20,
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundColor:'#fff',
+        borderEndWidth:0.01,
+        borderColor:'#fff'
     },
     textStyle: {
         fontSize: 18,
         fontFamily: 'Bold'
+    },
+    shadow: {
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+        elevation: 5,
     }
 })
 export default EmptyCart;

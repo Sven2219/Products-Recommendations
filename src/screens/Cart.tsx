@@ -5,7 +5,7 @@ import Icon from '../components/general/Icon';
 import axios from 'axios';
 import { AppDispatch } from '../context/AppDispatch';
 import { AppState } from '../context/AppState';
-import { IPartOfProduct, IProduct } from '../helpers/interfaces';
+import { IPartOfProduct } from '../helpers/interfaces';
 import ProductsList from '../components/cart/ProductsList';
 import EmptyCart from '../components/cart/EmptyCart';
 import YellowButton from '../components/general/YellowButton';
@@ -18,14 +18,13 @@ const Cart = ({ navigation }: IProps): JSX.Element => {
     const { shoppingCart } = useContext(AppState);
     const { setShoppingCart } = useContext(AppDispatch);
 
-
-
     const saveToDatabase = async (): Promise<void> => {
         try {
             const categorysAndIDs: IPartOfProduct[] = breakToIdAndCategory(shoppingCart);
             const groupedProducts = groupProducts(categorysAndIDs);
             const sqlStatment: string = createSQLInsertStatment(groupedProducts.groupedSmartphones, groupedProducts.groupedComputers, groupedProducts.groupedSports);
-            const result = await axios.post('https://recommendation1.azurewebsites.net/', { statment: sqlStatment });
+
+            const result = await axios.post('http://192.168.0.135:1337/purchasedProducts', { statment: sqlStatment });
             if (result.data) {
                 setShoppingCart([]);
             }

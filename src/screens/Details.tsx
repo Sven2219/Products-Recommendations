@@ -1,40 +1,59 @@
-import React, { useContext, useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, { useContext, useEffect, useState } from 'react';
+import { View, Text, Image, StyleSheet } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import YellowButton from '../components/general/YellowButton';
 import Icon from '../components/general/Icon';
 import { AppDispatch } from '../context/AppDispatch';
-import { AppState } from '../context/AppState';
-import { ICON_SIZE, ICON_SPACE, IMAGE_SIZE } from '../helpers/constants';
+import { ICON_SPACE, IMAGE_SIZE } from '../helpers/constants';
 import { IProduct } from '../helpers/interfaces';
-
+import BoughtTogether from '../components/details/BoughtTogether';
+import axios from 'axios';
+import * as Animatable from 'react-native-animatable';
 
 const Details = (props: any): JSX.Element => {
     const { product } = props.route.params;
     const { setShoppingCart } = useContext(AppDispatch);
-    const { shoppingCart } = useContext(AppState);
-    const [togetherBought, setTogetherBought] = useState<IProduct[]>([]);
+    const [boughtTogether, setBoughtTogether] = useState([]);
+    useEffect(() => {
+        getTogetherBoughtProducts();
+    }, [])
     const addToCart = (): void => {
         setShoppingCart((previouseState) => {
             return [...previouseState, product]
         })
     }
-
+    const getTogetherBoughtProducts = async (): Promise<void> => {
+        try {
+            const result = await axios.get(`http://192.168.0.135:1337/purchasedProducts/${product.p_id}`);
+            const data = result.data.filter((el: IProduct) => el.p_id !== product.p_id);
+            setBoughtTogether(data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    const animation = {
+        0: { translateY: 100, opacity: 0 },
+        1: { translateY: 0, opacity: 1 }
+    }
     return (
         <View style={styles.mainContainer}>
             <Icon onPress={() => props.navigation.navigate('Main')} left={ICON_SPACE} name="arrow-back" />
             <Icon onPress={() => props.navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline" />
             <View style={styles.imageContainer}>
                 <SharedElement id={`product.${product.p_id}.photo`} style={styles.sharedElement}>
-                    <Image source={{ uri: product.p_image }} style={styles.imageStyle}  />
+                    <Image source={{ uri: product.p_image }} style={styles.imageStyle} />
                 </SharedElement>
             </View>
             <View style={styles.priceContainer}>
                 <Text style={styles.priceText}>{product.p_price} Kn</Text>
             </View>
-            <YellowButton onPress={addToCart} title={"Add to cart"}/>
-        </View>
+            <Animatable.View animation={animation} delay={300} useNativeDriver duration={400} style={styles.descriptionContainer}>
+                <Text style={styles.descriptionText}>{product.p_description}</Text>
+            </Animatable.View>
+            {boughtTogether.length > 0 && < Animatable.Text animation={"fadeIn"} delay={400} useNativeDriver duration={400} style={styles.usersAlsoBuyText}>Korisnici su također kupili...</Animatable.Text>}
+            <BoughtTogether boughtTogether={boughtTogether} />
+            <YellowButton onPress={addToCart} title={"Add to cart"} />
+        </View >
     )
 }
 Details.sharedElements = (route: any, otherRoute: any, showing: any) => {
@@ -68,36 +87,23 @@ const styles = StyleSheet.create({
         height: IMAGE_SIZE * 0.73,
 
     },
+    descriptionContainer: {
+        marginTop: 45,
+        marginLeft: 10
+    },
+    descriptionText: {
+        fontSize: 16,
+        fontFamily: 'Regular'
+    },
     imageStyle: {
         ...StyleSheet.absoluteFillObject,
         resizeMode: 'cover'
     },
-    tickerStyle: {
-        fontSize: 24,
-        fontWeight: "bold",
-    },
-    heartContainer: {
-        width: 50,
-        height: 50,
-        borderRadius: 25,
-        backgroundColor: '#fff',
-        position: 'absolute',
-        bottom: 20,
-        left: 10,
-        borderWidth: 0.6,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    heartShadow: {
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-
-        elevation: 5,
+    usersAlsoBuyText: {
+        fontSize: 16,
+        fontFamily: 'Medium',
+        paddingTop: 10,
+        paddingLeft: 10
     }
 })
 export default Details;

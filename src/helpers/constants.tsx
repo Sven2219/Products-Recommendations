@@ -22,3 +22,5 @@ export const CART_IMAGE_SIZE: number = (height + width) / 12;
 export const CART_PRODUCT_CONTAINER_WIDTH: number = width * 0.85;
 export const CART_PRODUCT_CONTAINER_HEIGHT: number = height / 5.4;
 export const DELETE_ICON_SIZE: number = 25;
+
+export const DETAILS_IMAGE_SIZE: number = (width + height)/14;

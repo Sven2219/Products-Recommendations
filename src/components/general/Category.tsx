@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
+        backgroundColor:'#fff',
         padding: 10,
         borderWidth: 0.001
     },
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         shadowRadius: 8.30,
 
-        elevation: 2,
+        elevation: 5,
     }
 })
 

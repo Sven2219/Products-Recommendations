@@ -1,6 +1,6 @@
 import { IPartOfProduct, IProduct } from "../../helpers/interfaces";
 
-export const createSQLInsertStatment = (groupedSmartphones: string[], groupedComputers: string[], groupedSports: string[]):string => {
+export const createSQLInsertStatment = (groupedSmartphones: string[], groupedComputers: string[], groupedSports: string[]): string => {
     const joinedSmartphones = groupedSmartphones.length > 0 ? groupedSmartphones.join(",") : '';
     const joinedComputers = groupedComputers.length > 0 ? groupedComputers.join(",") : '';
     const joinedSports = groupedSports.length > 0 ? groupedSports.join(",") : '';
@@ -41,17 +41,19 @@ export const groupProducts = (shoppingCart: IPartOfProduct[]) => {
             sport.push(item);
         }
     })
+    const date = new Date();
+    const formatedDate = `'${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}'`
     //@ts-ignore
     const groupedSmartphones: string[] = smartphones.flatMap(
-        (v: IPartOfProduct, i: number) => smartphones.slice(i + 1).map(w => `( ${v.id}, ${w.id}, 'smartphones')`)
+        (v: IPartOfProduct, i: number) => smartphones.slice(i + 1).map(w => `( ${v.id}, ${w.id}, ${formatedDate})`)
     );
     //@ts-ignore
     const groupedComputers: string[] = computers.flatMap(
-        (v: IPartOfProduct, i: number) => computers.slice(i + 1).map(w => `( ${v.id}, ${w.id}, 'computers')`)
+        (v: IPartOfProduct, i: number) => computers.slice(i + 1).map(w => `( ${v.id}, ${w.id}, ${formatedDate})`)
     );
     //@ts-ignore
     const groupedSports: string[] = sport.flatMap(
-        (v: IPartOfProduct, i: number) => sport.slice(i + 1).map(w => `( ${v.id}, ${w.id}, 'sport')`)
+        (v: IPartOfProduct, i: number) => sport.slice(i + 1).map(w => `( ${v.id}, ${w.id}, ${formatedDate})`)
     );
     return { groupedSmartphones, groupedSports, groupedComputers }
 }
