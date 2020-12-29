@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#fff',
         padding: 10,
-        borderWidth: 0.001
     },
     categoryText: {
         fontSize: 17,

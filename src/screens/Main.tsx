@@ -14,14 +14,14 @@ import Cart from './Cart';
 const Main = (): JSX.Element => {
     const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { category: SMARTPHONES, products: [], cartModal: false });
     useEffect(() => {
-        getProducts();
+        setProducts();
     }, [state.category])
 
-    const isActive = (givenCategory: string): boolean => {
+    const isCategoryActive = (givenCategory: string): boolean => {
         return state.category === givenCategory;
     }
 
-    const getProducts = async (): Promise<void> => {
+    const setProducts = async (): Promise<void> => {
         try {
             const category: string = state.category.replace(" ", "");
             const products = await axios.get(`https://recommendation1.azurewebsites.net/${category}`);
@@ -38,22 +38,22 @@ const Main = (): JSX.Element => {
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}
                         onPress={() => dispatch({ type: "setCategory", payload: SMARTPHONES })}
-                        isActive={isActive(SMARTPHONES)} />
+                        isActive={isCategoryActive(SMARTPHONES)} />
                     <Category name={SMARTPHONE_EQUIPMENT}
                         onPress={() => dispatch({ type: "setCategory", payload: SMARTPHONE_EQUIPMENT })}
-                        isActive={isActive(SMARTPHONE_EQUIPMENT)} />
+                        isActive={isCategoryActive(SMARTPHONE_EQUIPMENT)} />
                     <Category name={COMPUTERS}
                         onPress={() => dispatch({ type: "setCategory", payload: COMPUTERS })}
-                        isActive={isActive(COMPUTERS)} />
+                        isActive={isCategoryActive(COMPUTERS)} />
                     <Category name={COMPUTER_EQUIPMENT}
                         onPress={() => dispatch({ type: "setCategory", payload: COMPUTER_EQUIPMENT })}
-                        isActive={isActive(COMPUTER_EQUIPMENT)} />
+                        isActive={isCategoryActive(COMPUTER_EQUIPMENT)} />
                     <Category name={SPORT}
                         onPress={() => dispatch({ type: "setCategory", payload: SPORT })}
-                        isActive={isActive(SPORT)} />
+                        isActive={isCategoryActive(SPORT)} />
                     <Category name={SPORT_EQUIPMENT}
                         onPress={() => dispatch({ type: "setCategory", payload: SPORT_EQUIPMENT })}
-                        isActive={isActive(SPORT_EQUIPMENT)} />
+                        isActive={isCategoryActive(SPORT_EQUIPMENT)} />
                 </ScrollView>
             </View>
             {state.cartModal && <Cart onPress={() => dispatch({ type: "setCartModal", payload: false })} />}

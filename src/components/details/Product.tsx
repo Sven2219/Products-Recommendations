@@ -3,7 +3,6 @@ import { Text, StyleSheet, Image } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AppDispatch } from '../../context/AppDispatch';
-
 import { DETAILS_IMAGE_SIZE, DETAILS_PRODUCT_HEIGHT, DETAILS_PRODUCT_WIDTH } from '../../helpers/constants';
 import { IProduct } from '../../helpers/interfaces';
 interface IProps {
@@ -13,13 +12,13 @@ interface IProps {
 
 const Product = ({ product }: IProps): JSX.Element => {
     const { setShoppingCart } = useContext(AppDispatch);
-    const addToCart = () => {
+    const addToCart = (): void => {
         setShoppingCart((prevState) => {
             return [...prevState, product]
         })
     }
     return (
-        <Animatable.View style={[styles.mainContainer, styles.shadow]} useNativeDriver animation={"fadeIn"} duration={300} delay={300}>
+        <Animatable.View style={[styles.mainContainer, styles.shadow]} useNativeDriver animation={"fadeIn"} duration={200} delay={50}>
             <Image source={{ uri: product.p_image }} style={styles.imageSize} />
             <Text style={styles.nameText}>{product.p_name}</Text>
             <Text style={styles.priceText}>{product.p_price}kn</Text>
@@ -37,16 +36,17 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
         borderColor: '#fff',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        borderWidth:0.001
     },
     shadow: {
-        shadowColor: "#000",
+        shadowColor: "#fff",
         shadowOffset: {
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowOpacity: 0.01,
+        shadowRadius: 2,
         elevation: 5,
     },
     imageSize: {
@@ -78,4 +78,6 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Product;
+export default React.memo(Product, (prevProps, currentProps) => {
+    return prevProps.product == currentProps.product;
+});

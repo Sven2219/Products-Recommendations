@@ -1,5 +1,4 @@
 import 'react-native-gesture-handler';
-
 import React, { useState } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
@@ -27,13 +26,13 @@ const SharedElementNavigation = (): JSX.Element => {
                             open: {
                                 animation: "timing", config: {
                                     duration: 300,
-                                    easing: Easing.inOut(Easing.ease)
+                                    easing: Easing.inOut(Easing.linear)
                                 }
                             },
                             close: {
                                 animation: "timing", config: {
                                     duration: 300,
-                                    easing: Easing.inOut(Easing.ease),
+                                    easing: Easing.inOut(Easing.linear),
 
                                 }
                             }
@@ -55,7 +54,7 @@ const SharedElementNavigation = (): JSX.Element => {
         </NavigationContainer>
     )
 }
-const App = () => {
+const App = (): JSX.Element => {
     const [shoppingCart, setShoppingCart] = useState<IProduct[]>([]);
     return (
         <AppDispatch.Provider value={{ setShoppingCart }}>
