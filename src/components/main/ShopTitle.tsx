@@ -6,7 +6,7 @@ const ShopTitle = (): JSX.Element => {
     return (
         <View style={styles.titleContainer}>
             <Text style={styles.titleText}>
-                SVEN SHOP
+                LINKS
             </Text>
         </View>
     )

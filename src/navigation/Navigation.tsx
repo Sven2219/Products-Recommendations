@@ -16,7 +16,6 @@ const SharedElementStack = createSharedElementStackNavigator();
 const SharedElementNavigation = (): JSX.Element => {
     return (
         <NavigationContainer>
-
             <SharedElementStack.Navigator initialRouteName={"Main"} headerMode="none">
                 <SharedElementStack.Screen component={Details} name="Details"
                     options={() => ({
@@ -54,6 +53,7 @@ const SharedElementNavigation = (): JSX.Element => {
         </NavigationContainer>
     )
 }
+//I use the approach that the basket is modal and not the screen because SHARED ELEMENT HAS BUG WHEN IT IS NESTED
 const App = (): JSX.Element => {
     const [shoppingCart, setShoppingCart] = useState<IProduct[]>([]);
     return (

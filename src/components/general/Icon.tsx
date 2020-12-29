@@ -9,7 +9,6 @@ interface IProps {
     right?: number;
     name: string;
 }
-
 const Icon = ({ onPress, left, right, name }: IProps): JSX.Element => {
     return (
         <View style={[styles.cartContainer, { left: left, right: right }]}>

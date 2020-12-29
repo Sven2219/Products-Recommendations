@@ -6,7 +6,6 @@ export interface IState {
     cartModal: boolean;
 }
 
-
 export type setCategory = {
     readonly type: "setCategory";
     readonly payload: string;

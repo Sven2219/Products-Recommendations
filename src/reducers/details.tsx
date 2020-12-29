@@ -26,7 +26,6 @@ export const reducer = (state: IState, actions: Actions) => {
             return { ...state, cartModal: actions.payload };
         case "setProducts":
             return { ...state, products: actions.products, additionalProductsTitle: actions.additionalProductsTitle };
-
         default:
             return state;
     }

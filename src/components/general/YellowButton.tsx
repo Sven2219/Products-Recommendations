@@ -6,7 +6,7 @@ interface IProps {
     onPress: () => void | Promise<void>;
     title: string;
 }
-
+//Confirm and Add to cart Button!
 const YellowButton = ({ onPress, title }: IProps): JSX.Element => {
     return (
         <View style={styles.cartContainer}>

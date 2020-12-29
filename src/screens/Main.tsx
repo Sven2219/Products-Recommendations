@@ -1,9 +1,9 @@
 import React, { useEffect, useReducer } from 'react';
 import { ScrollView, StyleSheet, View } from 'react-native';
-import Category from '../components/general/Category';
+import Category from '../components/main/Category';
 import { COMPUTERS, COMPUTER_EQUIPMENT, SMARTPHONES, SMARTPHONE_EQUIPMENT, SPORT, SPORT_EQUIPMENT } from '../helpers/types';
 import { Actions, IState, reducer } from '../reducers/main';
-import ShopTitle from '../components/general/ShopTitle';
+import ShopTitle from '../components/main/ShopTitle';
 import ProductsList from '../components/main/ProductsList';
 import axios from 'axios';
 import Icon from '../components/general/Icon';
@@ -13,6 +13,7 @@ import Cart from './Cart';
 
 const Main = (): JSX.Element => {
     const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { category: SMARTPHONES, products: [], cartModal: false });
+    
     useEffect(() => {
         setProducts();
     }, [state.category])
