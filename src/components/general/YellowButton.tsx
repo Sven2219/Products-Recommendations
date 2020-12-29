@@ -1,5 +1,6 @@
 import React from 'react';
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { YELLOW_BUTTON_HEIGHT, YELLOW_BUTTON_WIDTH } from '../../helpers/constants';
 
 interface IProps {
     onPress: () => void | Promise<void>;
@@ -18,16 +19,15 @@ const YellowButton = ({ onPress, title }: IProps): JSX.Element => {
 
 const styles = StyleSheet.create({
     cartContainer: {
-        width: 220,
-        height: 50,
-        borderRadius: 25,
+        width: YELLOW_BUTTON_WIDTH,
+        height: YELLOW_BUTTON_HEIGHT,
+        borderRadius: YELLOW_BUTTON_HEIGHT/2,
         backgroundColor: "rgba(218, 165, 32,0.8)",
         position: 'absolute',
-        bottom: 20,
+        bottom: YELLOW_BUTTON_HEIGHT/2-5,
         right: 10,
         alignItems: 'center',
         justifyContent: 'center'
-
     },
     addToCartText: {
         fontFamily: 'Bold',

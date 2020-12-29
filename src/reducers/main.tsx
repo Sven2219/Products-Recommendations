@@ -3,6 +3,7 @@ import { IProduct } from "../helpers/interfaces";
 export interface IState {
     category: string;
     products: IProduct[];
+    cartModal: boolean;
 }
 
 
@@ -14,7 +15,11 @@ export type setProducts = {
     readonly type: "setProducts";
     readonly payload: IProduct[];
 }
-export type Actions = setCategory | setProducts;
+export type setCartModal = {
+    readonly type: "setCartModal";
+    readonly payload: boolean;
+}
+export type Actions = setCategory | setProducts | setCartModal;
 
 export const reducer = (state: IState, actions: Actions) => {
     switch (actions.type) {
@@ -22,6 +27,8 @@ export const reducer = (state: IState, actions: Actions) => {
             return { ...state, category: actions.payload };
         case "setProducts":
             return { ...state, products: actions.payload };
+        case "setCartModal":
+            return { ...state, cartModal: actions.payload };
         default:
             return state;
     }

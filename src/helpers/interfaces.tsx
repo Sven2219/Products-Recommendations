@@ -6,7 +6,13 @@ export interface IProduct {
     p_description: string;
     p_category: string;
 }
-export interface IPartOfProduct {
+export interface ICategory {
     id: number;
     category: string;
+}
+export interface IShoppingCart {
+    p_id: number;
+    p_name: string;
+    p_price: number;
+    p_image: string;
 }

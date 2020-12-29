@@ -1,5 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { MENU_HEIGHT } from '../../helpers/constants';
 
 interface IProps {
     name: string;
@@ -9,25 +10,22 @@ interface IProps {
 
 const Category = ({ name, onPress, isActive }: IProps): JSX.Element => {
     return (
-        <TouchableOpacity onPress={onPress}>
-            <View style={[styles.mainContainer, styles.shadow]}>
-                <Text style={[styles.categoryText, { color: isActive ? "#000" : "rgba(105, 105, 105,0.7)" }]}>
-                    {name}
-                </Text>
-            </View>
+        <TouchableOpacity onPress={onPress} style={[styles.mainContainer, styles.shadow]}>
+            <Text style={[styles.categoryText, { color: isActive ? "#000" : "rgba(105, 105, 105,0.7)" }]}>
+                {name}
+            </Text>
         </TouchableOpacity>
-
     )
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
-        height: 30,
+        height: MENU_HEIGHT/2+5,
         margin: 10,
         borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:'#fff',
+        backgroundColor: '#fff',
         padding: 10,
         borderWidth: 0.001
     },
@@ -43,7 +41,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.2,
         shadowRadius: 8.30,
-
         elevation: 5,
     }
 })

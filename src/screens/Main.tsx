@@ -7,19 +7,20 @@ import ShopTitle from '../components/general/ShopTitle';
 import ProductsList from '../components/main/ProductsList';
 import axios from 'axios';
 import Icon from '../components/general/Icon';
-import { ICON_SPACE } from '../helpers/constants';
-interface IProps {
-    navigation: any;
-}
+import { ICON_SPACE, MENU_HEIGHT } from '../helpers/constants';
+import Cart from './Cart';
 
-const Main = ({ navigation }: IProps): JSX.Element => {
-    const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { category: SMARTPHONES, products: [] });
-    const isActive = (givenCategory: string): boolean => {
-        return state.category === givenCategory;
-    }
+
+const Main = (): JSX.Element => {
+    const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { category: SMARTPHONES, products: [], cartModal: false });
     useEffect(() => {
         getProducts();
     }, [state.category])
+
+    const isActive = (givenCategory: string): boolean => {
+        return state.category === givenCategory;
+    }
+
     const getProducts = async (): Promise<void> => {
         try {
             const category: string = state.category.replace(" ", "");
@@ -32,7 +33,7 @@ const Main = ({ navigation }: IProps): JSX.Element => {
     return (
         <View style={styles.mainContainer}>
             <ShopTitle />
-            <Icon onPress={() => navigation.navigate('Cart')} right={ICON_SPACE} name="cart-outline" />
+            <Icon onPress={() => dispatch({ type: "setCartModal", payload: true })} right={ICON_SPACE} name="cart-outline" />
             <View style={styles.scrollViewContainer}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                     <Category name={SMARTPHONES}
@@ -55,7 +56,8 @@ const Main = ({ navigation }: IProps): JSX.Element => {
                         isActive={isActive(SPORT_EQUIPMENT)} />
                 </ScrollView>
             </View>
-            {state.products[0] !== undefined && < ProductsList navigation={navigation} products={state.products} />}
+            {state.cartModal && <Cart onPress={() => dispatch({ type: "setCartModal", payload: false })} />}
+            {state.products[0] !== undefined && < ProductsList products={state.products} />}
         </View>
     )
 }
@@ -66,7 +68,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     scrollViewContainer: {
-        height: 50
+        height: MENU_HEIGHT
     },
 
 })

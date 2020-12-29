@@ -1,32 +1,38 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, StyleSheet, Image } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SharedElement } from 'react-navigation-shared-element';
-import { DETAILS_IMAGE_SIZE } from '../../helpers/constants';
+import { AppDispatch } from '../../context/AppDispatch';
+
+import { DETAILS_IMAGE_SIZE, DETAILS_PRODUCT_HEIGHT, DETAILS_PRODUCT_WIDTH } from '../../helpers/constants';
+import { IProduct } from '../../helpers/interfaces';
 interface IProps {
-    product: any;
+    product: IProduct;
 
 }
 
 const Product = ({ product }: IProps): JSX.Element => {
+    const { setShoppingCart } = useContext(AppDispatch);
+    const addToCart = () => {
+        setShoppingCart((prevState) => {
+            return [...prevState, product]
+        })
+    }
     return (
         <Animatable.View style={[styles.mainContainer, styles.shadow]} useNativeDriver animation={"fadeIn"} duration={300} delay={300}>
-            <SharedElement id={`product.${product.p_id}.photo`}>
-                <Image source={{ uri: product.p_image }} style={styles.imageSize} />
-            </SharedElement>
+            <Image source={{ uri: product.p_image }} style={styles.imageSize} />
             <Text style={styles.nameText}>{product.p_name}</Text>
             <Text style={styles.priceText}>{product.p_price}kn</Text>
-            <TouchableOpacity style={styles.addButtonContainer}>
-                <Text style={styles.addButtonText}>Dodaj u košaricu</Text>
+            <TouchableOpacity style={styles.addButtonContainer} onPress={addToCart}>
+                <Text style={styles.addButtonText}>Add to cart</Text>
             </TouchableOpacity>
         </Animatable.View >)
 }
 
 const styles = StyleSheet.create({
     mainContainer: {
-        width: 125,
-        height: 150,
+        width: DETAILS_PRODUCT_WIDTH,
+        height: DETAILS_PRODUCT_HEIGHT,
         margin: 20,
         borderRadius: 10,
         alignItems: 'center',
@@ -72,6 +78,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default React.memo(Product, (prevProps, currentProps) => {
-    return prevProps.product == currentProps.product;
-});
+export default Product;

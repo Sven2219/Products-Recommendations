@@ -1,18 +1,18 @@
 import React from 'react';
-import { View, Animated, StyleSheet } from 'react-native';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { View, Animated, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 import { SharedElement } from 'react-navigation-shared-element';
 import { IMAGE_SIZE, width, height } from '../../helpers/constants';
 import { IProduct } from '../../helpers/interfaces';
+import { useNavigation } from '@react-navigation/native';
 
 interface IProps {
     product: IProduct;
     scrollX: Animated.Value;
     index: number;
-    navigation: any;
 }
 
-const Product = ({ product, scrollX, index, navigation }: IProps): JSX.Element => {
+const Product = ({ product, scrollX, index }: IProps): JSX.Element => {
+    const navigation = useNavigation();
     const inputRange = [(index - 1) * width, (index) * width, (index + 1) * width];
     const scale = scrollX.interpolate({
         inputRange,
@@ -25,7 +25,7 @@ const Product = ({ product, scrollX, index, navigation }: IProps): JSX.Element =
     return (
         <View style={styles.productStyle}>
             <TouchableWithoutFeedback onPress={() => navigation.navigate('Details', { product })} style={styles.imageSize}>
-                <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageSize}>
+                <SharedElement id={`product.${product.p_id}.photo`} style={styles.imageSize} collapsable={false}>
                     <Animated.Image
                         source={{ uri: product.p_image }}
                         style={[
@@ -79,5 +79,5 @@ const styles = StyleSheet.create({
     },
 })
 export default React.memo(Product, (prevProps, currentProps) => {
-    return prevProps.index == currentProps.index && prevProps.product == currentProps.product && prevProps.navigation == currentProps.navigation;
+    return prevProps.product == currentProps.product;
 });

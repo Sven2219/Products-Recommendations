@@ -4,24 +4,22 @@ import { IProduct } from '../../helpers/interfaces';
 import Product from './Product';
 
 interface IProps {
-    boughtTogether: IProduct[];
-
+    products: IProduct[];
 }
 
-
-const BoughtTogether = ({ boughtTogether }: IProps) => {
-    const renderItem = (item:any) => {
+const ProductsList = ({ products }: IProps): JSX.Element => {
+    const renderItem = (item: IProduct): JSX.Element => {
         return <Product product={item} />
     }
     return (
         <FlatList
-            data={boughtTogether}
+            data={products}
             showsHorizontalScrollIndicator={false}
             horizontal
-            keyExtractor={(item, index) => index.toString()}
-            renderItem={({ item, index }) => renderItem(item)}
+            keyExtractor={(_, index) => index.toString()}
+            renderItem={({ item }: { item: IProduct }) => renderItem(item)}
         />
     )
 }
 
-export default BoughtTogether;
+export default ProductsList;

@@ -7,7 +7,7 @@ const EmptyCart = (): JSX.Element => {
     return (<View style={styles.mainContainer}>
         <View style={[styles.cartContainer, styles.shadow]}>
             <Ionicons name="md-cart-outline" size={EMPTY_CART_SIZE} />
-            <Text style={styles.textStyle}>Your cart is currently empty</Text>
+            <Text style={styles.textStyle}>Cart is currently empty</Text>
         </View>
     </View>)
 }

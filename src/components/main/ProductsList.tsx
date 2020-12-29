@@ -7,10 +7,9 @@ import Ticker from './Ticker';
 
 interface IProps {
     products: IProduct[]
-    navigation: any
 }
 
-const ProductsList = ({ products, navigation }: IProps): JSX.Element => {
+const ProductsList = ({ products }: IProps): JSX.Element => {
     const scrollX = useRef(new Animated.Value(0)).current;
     return (
         <View>
@@ -24,9 +23,9 @@ const ProductsList = ({ products, navigation }: IProps): JSX.Element => {
                 )}
                 scrollEventThrottle={16}
                 pagingEnabled
-                windowSize={1}
+                windowSize={2}
                 keyExtractor={(_, index) => index.toString()}
-                renderItem={({ item: product, index }) => <Product navigation={navigation} product={product} scrollX={scrollX} index={index} />}
+                renderItem={({ item: product, index }) => <Product product={product} scrollX={scrollX} index={index} />}
             />
             <Pagination scrollX={scrollX} products={products} />
             <Ticker scrollX={scrollX} products={products} />

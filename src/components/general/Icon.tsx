@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import { ICON_SIZE, ICON_SPACE, ICON_TOP } from '../../helpers/constants';
+import { ICON_SIZE, ICON_TOP } from '../../helpers/constants';
 
 interface IProps {
     onPress: () => void;

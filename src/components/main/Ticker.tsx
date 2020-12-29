@@ -14,7 +14,11 @@ const Ticker = ({ scrollX, products }: IProps): JSX.Element => {
     return (<View style={styles.tickerContainer}>
         {products.map(product => {
             return (
-                <Animated.Text key={product.p_id} style={[styles.tickerStyle, { transform: [{ translateY }] }]}>{product.p_name}</Animated.Text>
+                <Animated.Text
+                    key={product.p_id}
+                    style={[styles.tickerStyle, { transform: [{ translateY }] }]}>
+                    {product.p_name}
+                </Animated.Text>
             )
         })}
     </View>)

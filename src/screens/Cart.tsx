@@ -1,41 +1,41 @@
 import React, { useContext } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Modal, StyleSheet, Text, View } from 'react-native';
 import { ICON_SPACE } from '../helpers/constants';
 import Icon from '../components/general/Icon';
 import axios from 'axios';
 import { AppDispatch } from '../context/AppDispatch';
 import { AppState } from '../context/AppState';
-import { IPartOfProduct } from '../helpers/interfaces';
+import { ICategory } from '../helpers/interfaces';
 import ProductsList from '../components/cart/ProductsList';
 import EmptyCart from '../components/cart/EmptyCart';
 import YellowButton from '../components/general/YellowButton';
 import { breakToIdAndCategory, createSQLInsertStatment, groupProducts } from '../components/cart/statment';
+
 interface IProps {
-    navigation: any;
+    onPress: () => void;
 }
 
-const Cart = ({ navigation }: IProps): JSX.Element => {
+const Cart = ({ onPress }: IProps): JSX.Element => {
     const { shoppingCart } = useContext(AppState);
     const { setShoppingCart } = useContext(AppDispatch);
 
     const saveToDatabase = async (): Promise<void> => {
         try {
-            const categorysAndIDs: IPartOfProduct[] = breakToIdAndCategory(shoppingCart);
-            const groupedProducts = groupProducts(categorysAndIDs);
+            const categorys: ICategory[] = breakToIdAndCategory(shoppingCart);
+            const groupedProducts = groupProducts(categorys);
             const sqlStatment: string = createSQLInsertStatment(groupedProducts.groupedSmartphones, groupedProducts.groupedComputers, groupedProducts.groupedSports);
-
-            const result = await axios.post('http://192.168.0.135:1337/purchasedProducts', { statment: sqlStatment });
-            if (result.data) {
-                setShoppingCart([]);
-            }
+            await axios.post('https://recommendation1.azurewebsites.net/purchasedProducts', { statment: sqlStatment });
         } catch (error) {
             console.log(error);
+            //UNIQUE KEY ERORR!!!
         }
     }
 
     const saveProducts = (): JSX.Element | undefined => {
         if (shoppingCart.length > 0) {
-            return (<YellowButton onPress={saveToDatabase} title={"Confirm"} />)
+            return (<YellowButton onPress={() => {
+                saveToDatabase().then(() => setShoppingCart([]))
+            }} title={"Confirm"} />)
         }
     }
     const getProducts = (): JSX.Element => {
@@ -47,17 +47,19 @@ const Cart = ({ navigation }: IProps): JSX.Element => {
     const getTotalPrice = (): number => {
         return shoppingCart.reduce((accumulator, item) => accumulator + item.p_price, 0);
     }
-    return (<View style={styles.mainContainer}>
-        <Icon left={ICON_SPACE} onPress={() => navigation.goBack()} name="arrow-back" />
-        <View style={styles.headerTextPosition}>
-            <Text style={styles.headerText}>Shopping cart</Text>
-        </View>
-        {getProducts()}
-        {saveProducts()}
-        <View style={styles.totalPricePosition}>
-            <Text style={styles.totalPrice}>{getTotalPrice()} kn</Text>
-        </View>
-    </View>)
+    return (
+        <Modal style={styles.mainContainer}>
+            <Icon left={ICON_SPACE} onPress={onPress} name="arrow-back" />
+            <View style={styles.headerTextPosition}>
+                <Text style={styles.headerText}>Shopping cart</Text>
+            </View>
+            {getProducts()}
+            {saveProducts()}
+            <View style={styles.totalPricePosition}>
+                <Text style={styles.totalPrice}>{getTotalPrice()} kn</Text>
+            </View>
+        </Modal>
+    )
 }
 
 const styles = StyleSheet.create({
