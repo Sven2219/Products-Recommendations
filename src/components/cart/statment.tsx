@@ -1,5 +1,5 @@
 import { ICategory, IProduct } from "../../helpers/interfaces";
-
+//This whole tsx file is responsible for creating statment for POST request!
 export const createSQLInsertStatment = (groupedSmartphones: string[], groupedComputers: string[], groupedSports: string[]): string => {
     const joinedSmartphones:string = groupedSmartphones.length > 0 ? groupedSmartphones.join(",") : '';
     const joinedComputers:string = groupedComputers.length > 0 ? groupedComputers.join(",") : '';

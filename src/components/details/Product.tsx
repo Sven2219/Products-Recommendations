@@ -64,8 +64,8 @@ const styles = StyleSheet.create({
         top: 5
     },
     addButtonContainer: {
-        width: 110,
-        height: 20,
+        width: DETAILS_PRODUCT_WIDTH*0.85,
+        height: 24,
         backgroundColor: "rgba(218, 165, 32,0.8)",
         borderRadius: 10,
         justifyContent: 'center',

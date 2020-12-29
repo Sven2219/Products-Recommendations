@@ -34,11 +34,12 @@ const Cart = ({ onPress }: IProps): JSX.Element => {
     const saveProducts = (): JSX.Element | undefined => {
         if (shoppingCart.length > 0) {
             return (<YellowButton onPress={() => {
-                saveToDatabase().then(() => setShoppingCart([]))
+                saveToDatabase();
+                setShoppingCart([]);
             }} title={"Confirm"} />)
         }
     }
-    const getProducts = (): JSX.Element => {
+    const getProductsList = (): JSX.Element => {
         if (shoppingCart.length < 1) {
             return (<EmptyCart />)
         }
@@ -53,7 +54,7 @@ const Cart = ({ onPress }: IProps): JSX.Element => {
             <View style={styles.headerTextPosition}>
                 <Text style={styles.headerText}>Shopping cart</Text>
             </View>
-            {getProducts()}
+            {getProductsList()}
             {saveProducts()}
             <View style={styles.totalPricePosition}>
                 <Text style={styles.totalPrice}>{getTotalPrice()} kn</Text>
