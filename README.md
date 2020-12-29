@@ -1,5 +1,5 @@
 # Products-Recommendations
-The application is made in "react-native" but is made only for android devices.
+The application is made in react-native but is made only for android devices.
 The purpose of the application is to make a simple shop and suggest products based on the purchases of other users.
 If there were more purchases from other users, then the closest products are selected in terms of price. (In the video below => Users also buyed...)
 If there were no purchases, then we anticipate the closest price products from that category .(In the video below => You could be interested in... )
