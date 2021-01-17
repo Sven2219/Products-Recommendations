@@ -10,7 +10,7 @@ import axios from 'axios';
 import * as Animatable from 'react-native-animatable';
 import Cart from './Cart';
 import { Actions, IState, reducer } from '../reducers/details';
-import { IProduct } from '../helpers/interfaces';
+import { IRoute } from '../helpers/interfaces';
 import { NavigationParams, NavigationScreenProp } from 'react-navigation';
 import { NavigationState } from '@react-navigation/native';
 
@@ -18,11 +18,10 @@ const animation = {
     0: { translateY: 100, opacity: 0 },
     1: { translateY: 0, opacity: 1 }
 }
+
 interface IProps {
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
-    route: {
-        params: { product: IProduct }
-    }
+    route: IRoute
 }
 const Details = ({ route, navigation }: IProps): JSX.Element => {
     const { product } = route.params;
@@ -119,7 +118,7 @@ const Details = ({ route, navigation }: IProps): JSX.Element => {
         </View >
     )
 }
-Details.sharedElements = (route: any) => {
+Details.sharedElements = (route: IRoute) => {
     const { product } = route.params;
     return [
         { id: `product.${product.p_id}.photo` },
