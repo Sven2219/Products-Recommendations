@@ -10,14 +10,22 @@ import axios from 'axios';
 import * as Animatable from 'react-native-animatable';
 import Cart from './Cart';
 import { Actions, IState, reducer } from '../reducers/details';
+import { IProduct } from '../helpers/interfaces';
+import { NavigationParams, NavigationScreenProp } from 'react-navigation';
+import { NavigationState } from '@react-navigation/native';
 
 const animation = {
     0: { translateY: 100, opacity: 0 },
     1: { translateY: 0, opacity: 1 }
 }
-
-const Details = (props: any): JSX.Element => {
-    const { product } = props.route.params;
+interface IProps {
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+    route: {
+        params: { product: IProduct }
+    }
+}
+const Details = ({ route, navigation }: IProps): JSX.Element => {
+    const { product } = route.params;
     const { setShoppingCart } = useContext(AppDispatch);
     const [state, dispatch] = useReducer<React.Reducer<IState, Actions>>(reducer, { products: [], cartModal: false, additionalProductsTitle: 'Users also buyed' })
 
@@ -77,7 +85,7 @@ const Details = (props: any): JSX.Element => {
 
     const exitScreen = (): void => {
         dispatch({ type: "setProducts", products: [], additionalProductsTitle: '' });
-        props.navigation.navigate('Main');
+        navigation.goBack();
     }
     return (
         <View style={styles.mainContainer} >
